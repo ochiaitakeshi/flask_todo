@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>ToDo</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- タスクの新規作成 -->
+    <h1><label for="new_task">新規作成</label><br></h1>
+    <label for="new_task">タスク</label>
+    <form action="/" method="POST">
+    <input type="text" id="name" name="todo_insert" required size="10" />
+    <!-- <input type="button" value="新規作成" /> -->
+    <button type="submit" value="1">新規作成</button>
+    </form>
+    <hr>
+    <!-- タスクのステータス更新 -->
+    <h1><label for="change_status">ステータスの更新</label><br></h1>
+    <label for="change_status_task">タスク</label>
+    <form action="/" method="POST">
+    <select name="change_status_task">
+        <option value="">--タスクを選択してください--</option>
+        {% for key in all %} <!-- ループしてキーを取り出す -->
+        <option value="{{ key }}">{{ key }}</option><!-- DBから取得 -->
+        {% endfor %}
+    </select>
+    <br>
+    <select name="change_status_status">
+        <option value="">--状態を選択してください--</option>
+        <option value="未実施">未実施</option>
+        <option value="実施中">実施中</option>
+        <option value="完了">完了</option>
+    </select>
+    <br>
+    <button type="submit" value="2">更新</button>
+    </form>
+    <hr>
+    <!-- ToDo情報表示 -->
+    <h1><label for="disp_todo">ToDo情報</label><br></h1>
+    <form action="/" method="POST">
+    <select name="disp_todo_status">
+        <option value="">--状態を選択してください--</option>
+        <option value="prev">未実施</option>
+        <option value="do">実施中</option>
+        <option value="done">完了</option>
+        <option value="all">全て</option>
+    </select>
+    <br>
+    <button type="submit" value="3">表示</button>
+    </form>
+    <!-- <table border="0" cellspacing="1" cellpadding="3"> -->
+    <table border="1" cellspacing="0">
+        <tr><td>タスク</td><td>ステータス</td></tr>
+        {% for key in user %} <!-- ループしてキーを取り出す -->
+        <tr><td>{{ key }}</td><td>{{ user[key] }}</td></tr><!-- DBを参照 -->
+        {% endfor %}
+    </table>
+
+</body>
+</html>
